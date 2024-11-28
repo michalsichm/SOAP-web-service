@@ -1,5 +1,7 @@
 package utb.fai.soapservice;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,26 +23,29 @@ public class LibraryService {
     private AuthorRepository authorRepository;
 
     public AuthorPersistent getAuthor(long authorId) {
-        return null;
+        Optional<AuthorPersistent> optionalAuthor = authorRepository.findById(authorId);
+        return optionalAuthor.orElse(null);
     }
 
     public BookPersistent getBook(long bookId) {
-        return null;
+        Optional<BookPersistent> optionalBook = bookRepository.findById(bookId);
+        return optionalBook.orElse(null);
     }
 
     public BookPersistent createBook(BookPersistent book) {
-        return null;
+        return bookRepository.save(book);
     }
 
     public void deleteBook(long bookId) {
-        
+        bookRepository.deleteById(bookId);
     }
 
     public AuthorPersistent createAuthor(AuthorPersistent author) {
-        return null;
+        return authorRepository.save(author);
     }
 
-    public void deleteAuthor(long authorId) {   
+    public void deleteAuthor(long authorId) {
+        authorRepository.deleteById(authorId);
     }
 
 }
